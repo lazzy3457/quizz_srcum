@@ -7,7 +7,7 @@ export default class ProgressBar {
         this.progress_bar = document.createElement("div");
         this.affiche_pourcentage = document.createElement("p");
         this.conteneur = document.createElement("div");
-        this.pourcentage = 0;
+        this.pourcentage = 50;
         this.size = 200;
         this.contenu = document.createElement("div");
 
@@ -20,12 +20,15 @@ export default class ProgressBar {
 
         this.conteneur.style.width = this.size + "px";
         this.conteneur.style.backgroundColor = "var(--grey)";
-        this.contenu.style.width = this
+        this.conteneur.style.padding = " 5px";
 
-        this.contenu.width
+        this.contenu.style.width = (this.size * this.pourcentage / 100) + "px";
+        this.contenu.style.backgroundColor = "var(--vert)";
+        this.contenu.style.padding = " 5px 0";
 
 
-    }
+
+    }   
 
     UpdateProgressBar (nb) {
          
