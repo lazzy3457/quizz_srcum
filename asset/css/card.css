@@ -3,6 +3,9 @@
     justify-content: center;
     border-radius: 30px;
     overflow: hidden;
+    max-width: 1140px;
+    min-width: 570px;
+    width: 100%;
 }
 
 .section_cours {
@@ -31,3 +34,6 @@
     top: calc(50% - 10px);
 }
 
+.conteneur_cours {
+    padding: 20px;
+}

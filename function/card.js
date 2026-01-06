@@ -1,6 +1,6 @@
 const liste = {};
 
-export function Card (conteneur) {
+export function Card (conteneur, titre, contenue) {
 
     let div = document.getElementById(conteneur);
 
@@ -22,7 +22,7 @@ export function Card (conteneur) {
     // titre de la card
     let titre_cours = document.createElement("h2");
     titre_cours.className = "titre_section";
-    titre_cours.textContent = "Titre de la partie";
+    titre_cours.textContent = titre;
     conteneur_titre.appendChild(titre_cours);
 
     // button ouverture et fermeture
@@ -37,6 +37,19 @@ export function Card (conteneur) {
 
     // div qui contiens le cours sous forme de paragraphe
     let contenu_cours = document.createElement("div");
-    contenu_cours.innerHTML = "je suis du cours <p> teste </p>";
+    contenu_cours.innerHTML = contenue;
     conteneur_cours.appendChild(contenu_cours);
+
+    let etat = true;
+
+    button_action.addEventListener("click", () => {
+        if (etat) {
+            etat = false;
+            conteneur_cours.style.display = "none";
+        }
+        else {
+            etat = true;
+            conteneur_cours.style.display = "flex";
+        }
+    })
 }

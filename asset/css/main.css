@@ -1,0 +1,10 @@
+body {
+    background-color: var(--color_fond);
+    margin: 0;
+}
+
+main {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+}
