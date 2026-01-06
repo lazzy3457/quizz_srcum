@@ -79,19 +79,53 @@ export function Card (conteneur, titre, contenue) {
     conteneur_question.className = "conteneur_question";
     conteneur_quiz.appendChild(conteneur_question);
 
-    //
-    let question = document.createElement("h4");
-    question.className = "question";
-    question.textContent = "je suis la question"
-    conteneur_question.appendChild(question);
-
-    let conteneur_reponse = document.createElement("div");
-    conteneur_reponse.className = "conteneur_reponse";
-    conteneur_question.appendChild(conteneur_reponse);
-
-    const reponse = [{question : "question 1", reponse : ["reponse 1", "reponse 2", "reponse 3"]}];
-
     
+    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : "2"}];
+
+    quizz.forEach((questionnaire, y) => {
+        //
+        let question = document.createElement("h4");
+        question.className = "question";
+        question.textContent = questionnaire.question;
+        conteneur_question.appendChild(question);
+
+        let conteneur_reponses = document.createElement("div");
+        conteneur_reponses.className = "conteneur_reponses";
+        conteneur_question.appendChild(conteneur_reponses);
+
+        questionnaire.reponses.forEach((reponse, i) => {
+            let div_reponse = document.createElement("div")
+            div_reponse.className = "conteneur_reponse";
+            let input_reponse = document.createElement("input");
+            let label_reponse = document.createElement("label");
+
+            input_reponse.type = questionnaire.type;
+            input_reponse.value = i;
+            input_reponse.id = y + "_" + i;
+            input_reponse.name = y;
+            label_reponse.textContent = reponse;
+            label_reponse.htmlFor = y + "_" + i;
+
+
+
+            div_reponse.appendChild(input_reponse);
+            div_reponse.appendChild(label_reponse);
+            conteneur_reponses.appendChild(div_reponse);
+
+            div_reponse.addEventListener("click", () => {
+                conteneur_reponses.childNodes.forEach(reponse_reset => {
+                        reponse_reset.style.backgroundColor = "transparent";
+                })
+                if (input_reponse.value == questionnaire.valide) {
+                    div_reponse.style.backgroundColor = "var(--vert)";
+                }
+                else {
+                    div_reponse.style.backgroundColor = "var(--rouge)";
+                }
+            })
+        })
+
+    });
 
 
 
