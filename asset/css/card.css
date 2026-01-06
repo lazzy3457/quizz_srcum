@@ -1,8 +1,8 @@
 .card {
     display: flex;
     justify-content: center;
-    border-radius: 30px;
-    overflow: hidden;
+    flex-direction: column;
+    gap: 30px;
     max-width: 1140px;
     min-width: 570px;
     width: 100%;
@@ -14,6 +14,8 @@
     width: 100%;
     background-color: var(--grey_card_open);
     padding: 0;
+    border-radius: 30px;
+    overflow: hidden;
 
 }
 
@@ -37,3 +39,11 @@
 .conteneur_cours {
     padding: 20px;
 }
+
+.section_quiz {
+    background-color: var(--grey_card_open);
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+
