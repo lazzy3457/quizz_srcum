@@ -1,8 +1,9 @@
 
 export default class ProgressBar {
 
-    constructor() {
-        const main = document.getElementById("main");
+    constructor(conteneur) {
+        // conteneur : id du conteneur de la progress bar
+        const main = document.getElementById(conteneur);
 
         this.progress_bar = document.createElement("div");
         this.affiche_pourcentage = document.createElement("p");
@@ -31,7 +32,15 @@ export default class ProgressBar {
     }   
 
     UpdateProgressBar (nb) {
-         
+        if (this.pourcentage + nb < 100) {
+            this.pourcentage += nb;
+        }
+        else {
+            return ;
+        }
+
+        this.contenu.style.width = (this.size * this.pourcentage / 100) + "px";
+        this.affiche_pourcentage.textContent = this.pourcentage + "%";
     }
 
 }
