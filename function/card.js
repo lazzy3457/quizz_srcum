@@ -80,7 +80,7 @@ export function Card (conteneur, titre, contenue) {
     conteneur_quiz.appendChild(conteneur_question);
 
     
-    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : "2"}];
+    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : "2"}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : "2"}];
 
     quizz.forEach((questionnaire, y) => {
         //
@@ -105,6 +105,7 @@ export function Card (conteneur, titre, contenue) {
             input_reponse.name = y;
             label_reponse.textContent = reponse;
             label_reponse.htmlFor = y + "_" + i;
+            let etat_question = false;
 
 
 
@@ -113,14 +114,22 @@ export function Card (conteneur, titre, contenue) {
             conteneur_reponses.appendChild(div_reponse);
 
             div_reponse.addEventListener("click", () => {
-                conteneur_reponses.childNodes.forEach(reponse_reset => {
+                if (questionnaire.type == "radio") {
+                    conteneur_reponses.childNodes.forEach(reponse_reset => {
                         reponse_reset.style.backgroundColor = "transparent";
-                })
-                if (input_reponse.value == questionnaire.valide) {
+                    })
+                }
+                if (etat_question == true) {
+                    div_reponse.style. backgroundColor = "transparent";
+                    etat_question = false;
+                }
+                else if (input_reponse.value == questionnaire.valide) {
                     div_reponse.style.backgroundColor = "var(--vert)";
+                    etat_question = true;
                 }
                 else {
                     div_reponse.style.backgroundColor = "var(--rouge)";
+                    etat_question = true;
                 }
             })
         })
