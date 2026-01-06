@@ -1,13 +1,13 @@
 :root {
 
     /* LES COULEURS */
-    --rouge : ;
-    --vert : ;
-    --bleu : ;
-    --grey : ;
-    --color_fond : ;
-    --grey_card_open : ;
-    --grey__card_close : ;
+    --rouge : #FD6060;
+    --vert : #00FF2F;
+    --bleu : #8291F2;
+    --grey : #D9D9D9;
+    --color_fond : #1F2236;
+    --grey_card_open : #4B494B;
+    --grey__card_close : #7D7D7D;
 
     /* LES POLICES */
     
