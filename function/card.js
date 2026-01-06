@@ -121,15 +121,43 @@ export function Card (conteneur, titre, contenue) {
                 }
                 if (etat_question == true) {
                     div_reponse.style. backgroundColor = "transparent";
+                    input_reponse.checked = false;
                     etat_question = false;
                 }
                 else if (input_reponse.value == questionnaire.valide) {
                     div_reponse.style.backgroundColor = "var(--vert)";
                     etat_question = true;
+                    input_reponse.checked = true;
+
                 }
                 else {
                     div_reponse.style.backgroundColor = "var(--rouge)";
                     etat_question = true;
+                    input_reponse.checked = true;
+                }
+            })
+
+            label_reponse.addEventListener("click", () => {
+                if (questionnaire.type == "radio") {
+                    conteneur_reponses.childNodes.forEach(reponse_reset => {
+                        reponse_reset.style.backgroundColor = "transparent";
+                    })
+                }
+                if (etat_question == true) {
+                    div_reponse.style. backgroundColor = "transparent";
+                    input_reponse.checked = false;
+                    etat_question = false;
+                }
+                else if (input_reponse.value == questionnaire.valide) {
+                    div_reponse.style.backgroundColor = "var(--vert)";
+                    etat_question = true;
+                    input_reponse.checked = true;
+
+                }
+                else {
+                    div_reponse.style.backgroundColor = "var(--rouge)";
+                    etat_question = true;
+                    input_reponse.checked = true;
                 }
             })
         })
