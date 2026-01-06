@@ -1,6 +1,8 @@
+// import ProgressBar from "./ProgressBar";
+
 const liste = {};
 
-export function Card (conteneur, titre, contenue) {
+export function Card (conteneur, titre, contenue, progressBar) {
 
     let div = document.getElementById(conteneur);
 
@@ -46,10 +48,12 @@ export function Card (conteneur, titre, contenue) {
         if (etat) {
             etat = false;
             conteneur_cours.style.display = "none";
+            section_quiz.style.display = "none";
         }
         else {
             etat = true;
             conteneur_cours.style.display = "flex";
+            section_quiz.style.display = "block";
         }
     })
 
@@ -80,7 +84,7 @@ export function Card (conteneur, titre, contenue) {
     conteneur_quiz.appendChild(conteneur_question);
 
     
-    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : "2"}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : "2"}];
+    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
 
     quizz.forEach((questionnaire, y) => {
         //
@@ -92,6 +96,10 @@ export function Card (conteneur, titre, contenue) {
         let conteneur_reponses = document.createElement("div");
         conteneur_reponses.className = "conteneur_reponses";
         conteneur_question.appendChild(conteneur_reponses);
+
+        let table_verif = [];
+        let progress_bar_update = false;
+
 
         questionnaire.reponses.forEach((reponse, i) => {
             let div_reponse = document.createElement("div")
@@ -109,57 +117,46 @@ export function Card (conteneur, titre, contenue) {
 
 
 
+
             div_reponse.appendChild(input_reponse);
             div_reponse.appendChild(label_reponse);
             conteneur_reponses.appendChild(div_reponse);
 
-            div_reponse.addEventListener("click", () => {
+            input_reponse.addEventListener("click", () => {
+                table_verif.push(input_reponse.value);
                 if (questionnaire.type == "radio") {
                     conteneur_reponses.childNodes.forEach(reponse_reset => {
                         reponse_reset.style.backgroundColor = "transparent";
                     })
+                    table_verif = [];
                 }
                 if (etat_question == true) {
                     div_reponse.style. backgroundColor = "transparent";
                     input_reponse.checked = false;
                     etat_question = false;
+                    table_verif = table_verif.filter(value => value !== input_reponse.value)
+
                 }
-                else if (input_reponse.value == questionnaire.valide) {
+                else if (questionnaire.valide.includes(input_reponse.value)) {
                     div_reponse.style.backgroundColor = "var(--vert)";
                     etat_question = true;
-                    input_reponse.checked = true;
+                    input_reponse.checked = true; 
 
                 }
                 else {
                     div_reponse.style.backgroundColor = "var(--rouge)";
                     etat_question = true;
-                    input_reponse.checked = true;
+                    input_reponse.checked = true;  
                 }
+
+                const sontEgaux = table_verif.sort().join(',') === questionnaire.valide.sort().join(',');
+                if (sontEgaux && progress_bar_update == false) {
+                    progressBar.UpdateProgressBar(5);
+                    progress_bar_update = true;
+                }
+                
             })
 
-            label_reponse.addEventListener("click", () => {
-                if (questionnaire.type == "radio") {
-                    conteneur_reponses.childNodes.forEach(reponse_reset => {
-                        reponse_reset.style.backgroundColor = "transparent";
-                    })
-                }
-                if (etat_question == true) {
-                    div_reponse.style. backgroundColor = "transparent";
-                    input_reponse.checked = false;
-                    etat_question = false;
-                }
-                else if (input_reponse.value == questionnaire.valide) {
-                    div_reponse.style.backgroundColor = "var(--vert)";
-                    etat_question = true;
-                    input_reponse.checked = true;
-
-                }
-                else {
-                    div_reponse.style.backgroundColor = "var(--rouge)";
-                    etat_question = true;
-                    input_reponse.checked = true;
-                }
-            })
         })
 
     });
