@@ -15,8 +15,8 @@ quizz :[
     valide : ["2"]},  
     {question : "question 1",  
      reponses : [  
-        "reponse 1",   
-        "reponse 2",   
+       > "reponse 1",   
+        >"reponse 2",   
         "reponse 3"  
         ],  
     type : "checkbox",   
