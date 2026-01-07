@@ -123,13 +123,13 @@ export function Card (conteneur, titre, contenue, progressBar) {
             conteneur_reponses.appendChild(div_reponse);
 
             input_reponse.addEventListener("click", () => {
-                table_verif.push(input_reponse.value);
                 if (questionnaire.type == "radio") {
                     conteneur_reponses.childNodes.forEach(reponse_reset => {
                         reponse_reset.style.backgroundColor = "transparent";
                     })
                     table_verif = [];
                 }
+                table_verif.push(input_reponse.value);
                 if (etat_question == true) {
                     div_reponse.style. backgroundColor = "transparent";
                     input_reponse.checked = false;
