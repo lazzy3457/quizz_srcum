@@ -24,7 +24,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
     // titre de la card
     let titre_cours = document.createElement("h2");
     titre_cours.className = "titre_section";
-    titre_cours.textContent = titre;
+    titre_cours.textContent = titre; 
     conteneur_titre_cours.appendChild(titre_cours);
 
     // button ouverture et fermeture
@@ -32,7 +32,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
     button_action.textContent = "action";
     conteneur_titre_cours.appendChild(button_action);
 
-    // div qui contient le cours
+    // div qui contient le cours 
     let conteneur_cours = document.createElement("div");
     conteneur_cours.className = "conteneur_cours";
     section_cours.appendChild(conteneur_cours);
@@ -85,6 +85,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
     
     const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
+    let add_progeress_bar = 20 / quizz.length;
 
     quizz.forEach((questionnaire, y) => {
         //
@@ -123,13 +124,13 @@ export function Card (conteneur, titre, contenue, progressBar) {
             conteneur_reponses.appendChild(div_reponse);
 
             input_reponse.addEventListener("click", () => {
-                table_verif.push(input_reponse.value);
                 if (questionnaire.type == "radio") {
                     conteneur_reponses.childNodes.forEach(reponse_reset => {
                         reponse_reset.style.backgroundColor = "transparent";
                     })
                     table_verif = [];
                 }
+                table_verif.push(input_reponse.value);
                 if (etat_question == true) {
                     div_reponse.style. backgroundColor = "transparent";
                     input_reponse.checked = false;
@@ -151,8 +152,12 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
                 const sontEgaux = table_verif.sort().join(',') === questionnaire.valide.sort().join(',');
                 if (sontEgaux && progress_bar_update == false) {
-                    progressBar.UpdateProgressBar(5);
+                    progressBar.UpdateProgressBar(add_progeress_bar);
                     progress_bar_update = true;
+                }
+                if (progress_bar_update == true && sontEgaux == false) {
+                    progressBar.UpdateProgressBar(-add_progeress_bar);
+                    progress_bar_update = false;
                 }
                 
             })
