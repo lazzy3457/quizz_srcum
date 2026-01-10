@@ -3,6 +3,11 @@
 const liste = {};
 
 export function Card (conteneur, titre, contenue, progressBar) {
+    // le conteneur : est l'element html qui va receuillir la card
+    // le titre : est le titre de la card
+    // le contenue : est le cours et les question au format JSON
+    // {cours : "<h2>je suis du cours</h2><p>explication du cours</p>",
+    //   quizz : [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["index_bonne_reponse"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["index_bonne_reponse1", "index_bonne_reponse2"]}]}
 
     let div = document.getElementById(conteneur);
 
@@ -24,7 +29,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
     // titre de la card
     let titre_cours = document.createElement("h2");
     titre_cours.className = "titre_section";
-    titre_cours.textContent = titre;
+    titre_cours.textContent = titre; 
     conteneur_titre_cours.appendChild(titre_cours);
 
     // button ouverture et fermeture
@@ -32,7 +37,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
     button_action.textContent = "action";
     conteneur_titre_cours.appendChild(button_action);
 
-    // div qui contient le cours
+    // div qui contient le cours 
     let conteneur_cours = document.createElement("div");
     conteneur_cours.className = "conteneur_cours";
     section_cours.appendChild(conteneur_cours);
@@ -85,6 +90,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
     
     const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
+    let add_progeress_bar = 20 / quizz.length;
 
     quizz.forEach((questionnaire, y) => {
         //
@@ -151,8 +157,12 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
                 const sontEgaux = table_verif.sort().join(',') === questionnaire.valide.sort().join(',');
                 if (sontEgaux && progress_bar_update == false) {
-                    progressBar.UpdateProgressBar(5);
+                    progressBar.UpdateProgressBar(add_progeress_bar);
                     progress_bar_update = true;
+                }
+                if (progress_bar_update == true && sontEgaux == false) {
+                    progressBar.UpdateProgressBar(-add_progeress_bar);
+                    progress_bar_update = false;
                 }
                 
             })
