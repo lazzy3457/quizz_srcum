@@ -175,8 +175,8 @@ const contenue = [
           "Pertinence technique ou code",
           "Exactitude des explications"
         ],
-        "type": "radio",
-        "valide": ["3"]
+        "type": "checkbox",
+        "valide": ["3", "2"]
       }
     ]
   }

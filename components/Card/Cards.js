@@ -153,6 +153,7 @@ export default class Cards {
             let label_reponse = document.createElement("label");
 
             input_reponse.type = questionnaire.type;
+            console.log(questionnaire.type);
             input_reponse.value = i;
             input_reponse.id = y + "_" + i + "_" + this.id;
             input_reponse.name = y;
@@ -173,25 +174,41 @@ export default class Cards {
     GestionEnregistrementReponse (input, div_reponse, id_question, id_reponse) {
         let info = this.reponse_utilisateur[id_question];
         if (input.type == "radio") {
-            this.reponse_utilisateur[id_question].reponse = [];
+            this.reponse_utilisateur[id_question].liste_reponse = [];
             this.reponse_utilisateur[id_question].element_html = [];
 
-            this.reponse_utilisateur[id_question].reponse.push(id_reponse);
+            this.reponse_utilisateur[id_question].liste_reponse.push(id_reponse);
             this.reponse_utilisateur[id_question].element_html.push(div_reponse);
         }
         else if (info.liste_reponse.include(id_reponse)) {
-            this.reponse_utilisateur[id_question].reponse.filter(id_reponse);
-            this.reponse_utilisateur[id_question].element_html.filter(div_reponse);
+            this.reponse_utilisateur[id_question].liste_reponse = this.reponse_utilisateur[id_question].liste_reponse.filter(item => item !== id_reponse);
+            this.reponse_utilisateur[id_question].element_html = this.reponse_utilisateur[id_question].element_html.filter(item => item !== div_reponse);
         }
         else {
-            this.reponse_utilisateur[id_question].reponse.push(id_reponse);
+            this.reponse_utilisateur[id_question].liste_reponse.push((id_reponse).toString());
             this.reponse_utilisateur[id_question].element_html.push(div_reponse);
         }
     }
 
     TraitementReponse () {
+        console.log(this.reponse_utilisateur)
         this.reponse_utilisateur.forEach((reponse, i) => {
-            
+            reponse.liste_reponse.forEach((valeur, y) => {
+
+                console.log(this.quizz[i].valide, i, valeur)
+
+                valeur = valeur + 1;
+
+                console.log(this.quizz[i].valide, i, valeur)
+
+
+                if (this.quizz[i].valide.includes(valeur.toString())) {
+                    reponse.element_html[y].style.backgroundColor = "var(--vert)";
+                }
+                else {
+                    reponse.element_html[y].style.backgroundColor = "var(--rouge)";
+                }
+            })
         })
     }
 
