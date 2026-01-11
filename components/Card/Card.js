@@ -160,7 +160,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
         question.textContent = questionnaire.question;
         conteneur_question.appendChild(question);
 
-        let conteneur_reponses = document.createElement("p");
+        let conteneur_reponses = document.createElement("div");
         conteneur_reponses.className = "conteneur_reponses";
         conteneur_question.appendChild(conteneur_reponses);
 
