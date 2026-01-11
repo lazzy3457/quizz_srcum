@@ -4,15 +4,17 @@ const liste = {};
 
 export default class Card {
 
-    constructor (conteneur, titre, data, progressBar) {
+    constructor (conteneur, titre, data, progressBar, progret, id) {
 
         this.progressBar = progressBar;
         this.conteneur = conteneur;
-        this.titre = titre;
+        this.id;
+        this.progret;
 
         this.data = data;
         this.cours = data.cours;
         this.quizz = data.quizz
+        this.titre = this.data.titre;
 
         this.visibiliy = true;
 
@@ -25,12 +27,6 @@ export default class Card {
         this.card = document.createElement("div");
         this.card.className = "card";
         this.conteneur_html.appendChild(this.card);
-
-        // titre de la card
-        let titre_cours = document.createElement("h2");
-        titre_cours.className = "titre_section";
-        titre_cours.textContent = titre; 
-        conteneur_titre_cours.appendChild(titre_cours);
 
         // button ouverture et fermeture
         let button_action = document.createElement("button");
@@ -52,16 +48,23 @@ export default class Card {
     }
 
     SectionCours () {
+        // la div titre de la partie cours
+        this.conteneur_titre_cours = document.createElement("div");
+        this.conteneur_titre_cours.className = "conteneur_titre";
+        this.section_cours.appendChild(this.conteneur_titre_cours);
+
+        // titre de la card
+        this.titre_cours = document.createElement("h2");
+        this.titre_cours.className = "titre_section";
+        this.titre_cours.textContent = this.titre; 
+        conteneur_titre_cours.appendChild(this.titre_cours);
 
         // div de la partie cours
         let section_cours = document.createElement("div");
         section_cours.className = "section_cours";
         card.appendChild(section_cours);
 
-        // la div titre de la partie cours
-        let conteneur_titre_cours = document.createElement("div");
-        conteneur_titre_cours.className = "conteneur_titre";
-        section_cours.appendChild(conteneur_titre_cours);
+        
 
         // div qui contient le cours 
         let conteneur_cours = document.createElement("div");

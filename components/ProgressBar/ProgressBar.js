@@ -1,9 +1,11 @@
 
 export default class ProgressBar {
 
-    constructor(conteneur) {
+    constructor(conteneur, sommaire) {
         // conteneur : id du conteneur de la progress bar
         const main = document.getElementById(conteneur);
+
+        this.sommaire = sommaire // permet la gestion des lock pour le sommaire
 
         this.progress_bar = document.createElement("div");
         this.affiche_pourcentage = document.createElement("p");
