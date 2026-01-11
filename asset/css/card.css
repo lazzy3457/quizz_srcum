@@ -64,6 +64,12 @@
     width: fit-content;
 }
 
+
+
+.correction { 
+    color: var(--vert);
+}
+
 #sommaire {
     display: flex;
     /* justify-content: center;
@@ -110,14 +116,16 @@
     font-family: "poppins", sans-serif;
 }
 
-.sommaire_card a {
+.sommaire_button{
     display: flex;
     width: 170px;
+    cursor: pointer;
     
     height: 40px;
     padding: 19px 15px;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 10px;
     flex-shrink: 0;
     border-radius: 100px;

@@ -37,11 +37,22 @@ export default class Sommaire {
 
             let titre = document.createElement("h2");
             titre.textContent = element.titre;
+            
+            let  lien; 
 
-            let lien = document.createElement("a");
-            lien.href = "#" + i;
-            lien.className = "sommaire_button"
-            lien.textContent = "Aller vers la section";
+            if (i == 0) {
+                lien = document.createElement("a");
+                lien.href = "#" + i;
+                lien.className = "sommaire_button"
+                lien.textContent = "Aller vers la section";
+            }
+            else {
+                lien = document.createElement("p");
+                lien.className = "sommaire_button"
+                lien.textContent = "Validé l'étape precedente";
+            }
+
+            this.liste_lien.push(lien);
 
             conteneur_lien.appendChild(titre);
             conteneur_lien.appendChild(lien);
@@ -50,7 +61,12 @@ export default class Sommaire {
         });
     }
 
-    verrou () {
+    deverrou (index) {
+        let lien = document.createElement("a");
+        lien.href = "#" + index;
+        lien.className = "sommaire_button"
+        lien.textContent = "Aller vers la section";
 
+        this.liste_lien[index].replaceWith(lien);
     }
 }

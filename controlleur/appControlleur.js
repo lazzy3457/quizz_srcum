@@ -184,10 +184,12 @@ const contenue = [
 
 const sommaire = new Sommaire(contenue, "main", progress_bar);
 
+// sommaire.deverrou(2);
+
 const seuille = 100 / contenue.length;
 
 contenue.forEach((element, i) => {
-    const card = new Cards("main", "Titre de l'étape", element, progress_bar, seuille, i);
+    const card = new Cards("main", "Titre de l'étape", element, progress_bar, seuille, i, sommaire);
 });
 
 // progress_bar.UpdateProgressBar(10);

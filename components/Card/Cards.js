@@ -4,17 +4,20 @@ const liste = {};
 
 export default class Cards {
 
-    constructor (conteneur, titre, data, progressBar, progret, id) {
+    constructor (conteneur, titre, data, progressBar, progret, id, sommaire) {
 
         this.progressBar = progressBar;
         this.conteneur = conteneur;
         this.id = id;
-        this.progret = progret;
+        this.sommaire = sommaire;
 
         this.data = data;
         this.cours = data.cours;
         this.quizz = data.quizz
         this.titre = this.data.titre;
+
+        this.progress = progret / this.quizz.length;
+
         
         this.reponse_utilisateur = [] // [{liste_reponse : [4], element_html : null }] id de la reponse idex du tableau
         this.quizz.forEach((question, index) => {
@@ -24,6 +27,8 @@ export default class Cards {
 
         this.visibiliy = true;
 
+        this.termimer = false;
+
         this.Init();
     }
 
@@ -32,6 +37,7 @@ export default class Cards {
         this.conteneur_html = document.getElementById(this.conteneur);
         this.card = document.createElement("div");
         this.card.className = "card";
+        this.card.id = this.id;
         this.conteneur_html.appendChild(this.card);
 
         this.SectionCours();
@@ -184,7 +190,7 @@ export default class Cards {
             this.reponse_utilisateur[id_question].liste_reponse = [];
             this.reponse_utilisateur[id_question].element_html = [];
 
-            this.reponse_utilisateur[id_question].liste_reponse.push(id_reponse);
+            this.reponse_utilisateur[id_question].liste_reponse.push((id_reponse).toString());
             this.reponse_utilisateur[id_question].element_html.push(div_reponse);
         }
         else if (info.liste_reponse.include(id_reponse)) {
@@ -198,27 +204,31 @@ export default class Cards {
     }
 
     TraitementReponse () {
+        this.sommaire.deverrou(this.id + 1); // deverrouille la prochaine partie
+
+        this.termimer = true;
         console.log(this.reponse_utilisateur)
         this.reponse_utilisateur.forEach((reponse, i) => {
             reponse.liste_reponse.forEach((valeur, y) => {
 
                 console.log(this.quizz[i].valide, i, valeur)
 
-                valeur = valeur + 1;
+                valeur = +valeur + 1;
 
                 console.log(this.quizz[i].valide, i, valeur)
 
 
                 if (this.quizz[i].valide.includes(valeur.toString())) {
                     reponse.element_html[y].style.backgroundColor = "var(--vert)";
-                    this.progressBar.UpdateProgressBar(this.progret);
+                    this.progressBar.UpdateProgressBar(this.progress);
                 }
                 else {
                     reponse.element_html[y].style.backgroundColor = "var(--rouge)";
                     let correction = document.createElement("p");
                     correction.className = "correction";
-                    correction.textContent = this.quizz[y].reponse[parseInt(this.quizz[y].valide[0])];
-                    this.liste_conteneur_correction[y].appendChild(correction);
+                    let indice = parseInt(this.quizz[i].valide[0])-1;
+                    correction.textContent = "Correction : " +  this.quizz[i].reponses[indice];
+                    this.liste_conteneur_correction[i].appendChild(correction);
                 }
             })
         })
