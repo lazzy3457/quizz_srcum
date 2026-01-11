@@ -1,0 +1,10 @@
+.progress_bar  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress_bar p {
+    color: white;
+}
