@@ -36,6 +36,19 @@ export default class Card {
         let button_action = document.createElement("button");
         button_action.textContent = "action";
         conteneur_titre_cours.appendChild(button_action);
+
+        button_action.addEventListener("click", () => {
+        if (etat) {
+            etat = false;
+            conteneur_cours.style.display = "none";
+            section_quiz.style.display = "none";
+        }
+        else {
+            etat = true;
+            conteneur_cours.style.display = "flex";
+            section_quiz.style.display = "block";
+        }
+    })
     }
 
     SectionCours () {
@@ -64,7 +77,26 @@ export default class Card {
     }
  
     SectionQuizz () {
+        // div conteneur du quiz
+    let section_quiz = document.createElement("div");
+    section_quiz.className = "section_quiz";
+    card.appendChild(section_quiz);
 
+    // div conteneur du titre du quiz 
+    let conteneur_titre_quiz = document.createElement("div");
+    conteneur_titre_quiz.className = "conteneur_titre";
+    section_quiz.appendChild(conteneur_titre_quiz);
+
+    // titre du quiz
+    let titre_quiz = document.createElement("h3");
+    titre_quiz.className = "titre_quiz";
+    titre_quiz.textContent = "Questionnaire";
+    conteneur_titre_quiz.appendChild(titre_quiz);
+
+    // conteneur du quiz
+    let conteneur_quiz = document.createElement("div");
+    conteneur_quiz.className = "conteneur_quiz";
+    section_quiz.appendChild(conteneur_quiz);
     }
 }
 
@@ -113,20 +145,20 @@ export function Card (conteneur, titre, contenue, progressBar) {
     // contenu_cours.innerHTML = contenue;
     // conteneur_cours.appendChild(contenu_cours);
 
-    let etat = true;
+    // let etat = true;
 
-    button_action.addEventListener("click", () => {
-        if (etat) {
-            etat = false;
-            conteneur_cours.style.display = "none";
-            section_quiz.style.display = "none";
-        }
-        else {
-            etat = true;
-            conteneur_cours.style.display = "flex";
-            section_quiz.style.display = "block";
-        }
-    })
+    // button_action.addEventListener("click", () => {
+    //     if (etat) {
+    //         etat = false;
+    //         conteneur_cours.style.display = "none";
+    //         section_quiz.style.display = "none";
+    //     }
+    //     else {
+    //         etat = true;
+    //         conteneur_cours.style.display = "flex";
+    //         section_quiz.style.display = "block";
+    //     }
+    // })
 
     // div conteneur du quiz
     let section_quiz = document.createElement("div");

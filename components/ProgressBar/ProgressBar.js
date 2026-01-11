@@ -33,7 +33,7 @@ export default class ProgressBar {
     }   
 
     UpdateProgressBar (nb) {
-        if (this.pourcentage + nb < 100) {
+        if (this.pourcentage + nb <= 100) {
             this.pourcentage += nb;
         }
         else {

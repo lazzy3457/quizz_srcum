@@ -2,7 +2,7 @@
 
 const liste = {};
 
-export function Card (conteneur, titre, contenue, progressBar, progret) {
+export function Card(conteneur, titre, contenue, progressBar, progret, id) {
     // le conteneur : est l'element html qui va receuillir la card
     // le titre : est le titre de la card
     // le contenue : est le cours et les question au format JSON
@@ -14,6 +14,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
     // div de la card
     let card = document.createElement("div")
     card.className = "card";
+    card.id = id;
     div.appendChild(card)
 
     // div de la partie coursA
@@ -29,7 +30,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
     // titre de la card
     let titre_cours = document.createElement("h2");
     titre_cours.className = "titre_section";
-    titre_cours.textContent = titre; 
+    titre_cours.textContent = contenue.titre;
     conteneur_titre_cours.appendChild(titre_cours);
 
     // button ouverture et fermeture
@@ -40,11 +41,13 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
     // div qui contient le cours 
     let conteneur_cours = document.createElement("div");
     conteneur_cours.className = "conteneur_cours";
+    conteneur_cours.style.color = "var(--white)";
     section_cours.appendChild(conteneur_cours);
 
     // div qui contiens le cours sous forme de paragraphe
     let contenu_cours = document.createElement("div");
     contenu_cours.innerHTML = contenue.cours;
+    contenu_cours.className = "contenue_cours"
     conteneur_cours.appendChild(contenu_cours);
 
     let etat = true;
@@ -81,6 +84,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
     // conteneur du quiz
     let conteneur_quizz = document.createElement("div");
     conteneur_quizz.className = "conteneur_quizz";
+    conteneur_quizz.style.color = "var(--white)";
     section_quiz.appendChild(conteneur_quizz);
 
     // conteneur d'une question
@@ -88,7 +92,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
     conteneur_question.className = "conteneur_question";
     conteneur_quizz.appendChild(conteneur_question);
 
-    
+
     // const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
     const quizz = contenue.quizz;
     let add_progeress_bar = progret / quizz.length;
@@ -109,17 +113,19 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
 
 
         questionnaire.reponses.forEach((reponse, i) => {
-            let div_reponse = document.createElement("p");
+            let div_reponse = document.createElement("div");
             div_reponse.className = "conteneur_reponse";
+            div_reponse.style.padding = "5px";
+            div_reponse.style.borderRadius = "100px";
             let input_reponse = document.createElement("input");
             let label_reponse = document.createElement("label");
 
             input_reponse.type = questionnaire.type;
             input_reponse.value = i;
-            input_reponse.id = y + "_" + i;
+            input_reponse.id = y + "_" + i + "_" + id;
             input_reponse.name = y;
             label_reponse.textContent = reponse;
-            label_reponse.htmlFor = y + "_" + i;
+            label_reponse.htmlFor = y + "_" + i + "_" + id;
             let etat_question = false;
 
 
@@ -138,7 +144,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
                 }
                 table_verif.push(input_reponse.value);
                 if (etat_question == true) {
-                    div_reponse.style. backgroundColor = "transparent";
+                    div_reponse.style.backgroundColor = "transparent";
                     input_reponse.checked = false;
                     etat_question = false;
                     table_verif = table_verif.filter(value => value !== input_reponse.value)
@@ -147,13 +153,13 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
                 else if (questionnaire.valide.includes(input_reponse.value)) {
                     div_reponse.style.backgroundColor = "var(--vert)";
                     etat_question = true;
-                    input_reponse.checked = true; 
+                    input_reponse.checked = true;
 
                 }
                 else {
                     div_reponse.style.backgroundColor = "var(--rouge)";
                     etat_question = true;
-                    input_reponse.checked = true;  
+                    input_reponse.checked = true;
                 }
 
                 const sontEgaux = table_verif.sort().join(',') === questionnaire.valide.sort().join(',');
@@ -165,7 +171,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
                     progressBar.UpdateProgressBar(-add_progeress_bar);
                     progress_bar_update = false;
                 }
-                
+
             })
 
         })

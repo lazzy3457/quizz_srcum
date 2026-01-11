@@ -5,7 +5,8 @@
 * le titre : est le titre de la card
 * le contenue : est le cours et les question au format JSON
 ``` js
-[{cours : "`<h2>je suis du cours</h2><p>explication du cours</p>`",  
+[{  titre : "titre",
+    cours : "`<h2>je suis du cours</h2><p>explication du cours</p>`",  
 
 quizz :[  
     {"question" : "question 1",  
