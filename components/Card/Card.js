@@ -31,6 +31,11 @@ export default class Card {
         titre_cours.className = "titre_section";
         titre_cours.textContent = titre; 
         conteneur_titre_cours.appendChild(titre_cours);
+
+        // button ouverture et fermeture
+        let button_action = document.createElement("button");
+        button_action.textContent = "action";
+        conteneur_titre_cours.appendChild(button_action);
     }
 
     SectionCours () {
@@ -93,10 +98,10 @@ export function Card (conteneur, titre, contenue, progressBar) {
     // titre_cours.textContent = titre; 
     // conteneur_titre_cours.appendChild(titre_cours);
 
-    // button ouverture et fermeture
-    let button_action = document.createElement("button");
-    button_action.textContent = "action";
-    conteneur_titre_cours.appendChild(button_action);
+    // // button ouverture et fermeture
+    // let button_action = document.createElement("button");
+    // button_action.textContent = "action";
+    // conteneur_titre_cours.appendChild(button_action);
 
     // // div qui contient le cours 
     // let conteneur_cours = document.createElement("div");

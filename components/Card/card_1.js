@@ -109,7 +109,7 @@ export function Card (conteneur, titre, contenue, progressBar, progret) {
 
 
         questionnaire.reponses.forEach((reponse, i) => {
-            let div_reponse = document.createElement("div")
+            let div_reponse = document.createElement("p");
             div_reponse.className = "conteneur_reponse";
             let input_reponse = document.createElement("input");
             let label_reponse = document.createElement("label");
