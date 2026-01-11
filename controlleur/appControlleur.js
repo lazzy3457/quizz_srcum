@@ -1,4 +1,4 @@
-// import ScrollButton from "./function/scroll_button.js";
+import ScrollButton from "./function/scroll_button.js";
 import ProgressBar from "../components/ProgressBar/ProgressBar.js";
 import { Card } from "../components/Card/card_1.js";
 
