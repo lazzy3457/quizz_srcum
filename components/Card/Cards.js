@@ -137,7 +137,7 @@ export default class Cards {
             this.conteneur_question = document.createElement("div");
             this.conteneur_question.className = "conteneur_question";
             this.conteneur_quiz.appendChild(this.conteneur_question);
-            
+
             this.SectionQuestion(questionnaire, y);
         })
 
@@ -303,6 +303,7 @@ export default class Cards {
         if (this.termimer == false) {
             this.AfficherSuivant();
         }
+        if (this.id < this.contenue.length - 1)
         this.button_suivant.style.display = "block";
         // this.button_validate.style.display = "none";
         this.termimer = true;

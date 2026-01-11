@@ -190,6 +190,6 @@
 .card,
 #sommaire {
     max-width: 900px;
-    min-width: 570px;
+    /* min-width: 570px; */
 }
 
