@@ -46,5 +46,13 @@
     overflow: hidden;
 }
 
+.conteneur_reponses {
+    display: flex;
+    flex-direction: column;
+}
+
+.conteneur_reponse {
+    display: flex;
+}
 
 
