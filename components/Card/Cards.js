@@ -62,9 +62,17 @@ export default class Cards {
         this.conteneur_titre_cours.className = "conteneur_titre";
         this.section_cours.appendChild(this.conteneur_titre_cours);
 
+        // titre de la card
+        this.titre_cours = document.createElement("h2");
+        this.titre_cours.className = "titre_section";
+        this.titre_cours.textContent = this.titre; 
+        this.conteneur_titre_cours.appendChild(this.titre_cours);
+
         // button ouverture et fermeture
         this.button_action = document.createElement("button");
-        this.button_action.textContent = "action";
+        this.button_action.textContent = "<";
+        this.button_action.className = "button_action";
+        this.button_action.style.transform = "rotate(-90deg)";
         this.conteneur_titre_cours.appendChild(this.button_action);
 
         this.button_action.addEventListener("click", () => {
@@ -72,19 +80,19 @@ export default class Cards {
             this.visibiliy = false;
             this.conteneur_cours.style.display = "none";
             this.section_quiz.style.display = "none";
+            this.button_action.style.transform = "rotate(90deg)";
+
         }
         else {
             this.visibiliy = true;
             this.conteneur_cours.style.display = "flex";
             this.section_quiz.style.display = "block";
+            this.button_action.style.transform = "rotate(-90deg)";
+
         }
     })
 
-        // titre de la card
-        this.titre_cours = document.createElement("h2");
-        this.titre_cours.className = "titre_section";
-        this.titre_cours.textContent = this.titre; 
-        this.conteneur_titre_cours.appendChild(this.titre_cours);
+        
 
         // div qui contient le cours 
         this.conteneur_cours = document.createElement("div");
@@ -93,6 +101,7 @@ export default class Cards {
 
         // div qui contiens le cours sous forme de paragraphe
         this.contenu_cours = document.createElement("div");
+        this.contenu_cours.className = "contenue_cours"
         this.contenu_cours.innerHTML = this.cours;
         this.conteneur_cours.appendChild(this.contenu_cours);
 
@@ -121,12 +130,14 @@ export default class Cards {
         this.conteneur_quiz.className = "conteneur_quiz";
         this.section_quiz.appendChild(this.conteneur_quiz);
 
-        // conteneur d'une question
-        this.conteneur_question = document.createElement("div");
-        this.conteneur_question.className = "conteneur_question";
-        this.conteneur_quiz.appendChild(this.conteneur_question);
+        
 
         this.data.quizz.forEach((questionnaire, y) => {
+            // conteneur d'une question
+            this.conteneur_question = document.createElement("div");
+            this.conteneur_question.className = "conteneur_question";
+            this.conteneur_quiz.appendChild(this.conteneur_question);
+            
             this.SectionQuestion(questionnaire, y);
         })
 
@@ -146,12 +157,21 @@ export default class Cards {
         this.button_suivant.textContent = "Suivant";
         this.conteneur_button.appendChild(this.button_suivant);
         this.button_suivant.addEventListener("click", () => {
-            window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth'
-            });
+            this.allerVersCarte(this.id + 1)
         })
         this.button_suivant.style.display = "none";
+    }
+
+    allerVersCarte(index) {
+        const cible = document.getElementById(index);
+        if (cible) {
+            cible.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        } else {
+            console.warn("La carte " + index + " n'a pas encore été générée.");
+        }
     }
 
     SectionQuestion (questionnaire, y) {
@@ -235,7 +255,6 @@ export default class Cards {
 
         // this.progressBar.UpdateProgressBar(-this.progress * this.nb_bonne_reponse.length);
 
-        this.termimer = true;
 
         console.log(this.reponse_utilisateur)
         this.reponse_utilisateur.forEach((reponse, i) => {
@@ -286,6 +305,8 @@ export default class Cards {
         }
         this.button_suivant.style.display = "block";
         // this.button_validate.style.display = "none";
+        this.termimer = true;
+
     }
     
     AfficherSuivant() {

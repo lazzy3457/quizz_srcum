@@ -51,7 +51,7 @@ export function Card(conteneur, titre, contenue, progressBar, progret, id) {
     let contenu_cours = document.createElement("div");
     contenu_cours.innerHTML = contenue.cours;
     contenu_cours.className = "contenue_cours"
-    conteneur_cours.appendChild(contenu_cours);
+    conteneur_cours.appendChild(contenu_cours);x
 
     let etat = true;
 

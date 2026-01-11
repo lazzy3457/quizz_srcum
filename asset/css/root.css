@@ -4,6 +4,7 @@
     --rouge : #FD6060;
     --vert : #14CC53;
     --bleu : #8291F2;
+    --bleu_hover : #8c94ca;
     --grey : #D9D9D9;
     --color_fond : #1F2236;
     --grey_card_open : #4B494B;
@@ -11,6 +12,6 @@
     --white : #FFFFFF;
 
     /* LES POLICES */
-
+    --poppins : 'Poppins', sans-serif;
 }
 

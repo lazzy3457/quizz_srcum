@@ -9,6 +9,7 @@ export default class ProgressBar {
 
         this.progress_bar = document.createElement("div");
         this.affiche_pourcentage = document.createElement("p");
+        this.affiche_pourcentage.className = "progress_bar_pourcentage";
         this.conteneur = document.createElement("div");
         this.progress_bar.className = "progress_bar";
         this.pourcentage = 0;

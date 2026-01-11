@@ -5,6 +5,8 @@
     gap: 10px;
 }
 
-.progress_bar p {
-    color: white;
+.progress_bar_pourcentage {
+    color: black;
+    font-weight: 600;
+    font-family: var(--poppins);
 }
