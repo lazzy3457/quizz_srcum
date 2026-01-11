@@ -44,7 +44,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
     // div qui contiens le cours sous forme de paragraphe
     let contenu_cours = document.createElement("div");
-    contenu_cours.innerHTML = contenue;
+    contenu_cours.innerHTML = contenue.;
     conteneur_cours.appendChild(contenu_cours);
 
     let etat = true;

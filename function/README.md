@@ -1,11 +1,12 @@
-# Le fonctionnent de la du coposant Card
+# Le fonctionnent du coposant Card
 
 ## Les parametres
 * le conteneur : est l'element html qui va receuillir la card
 * le titre : est le titre de la card
 * le contenue : est le cours et les question au format JSON
-{cours : "`<h2>je suis du cours</h2><p>explication du cours</p>`",  
 ``` js
+{cours : "`<h2>je suis du cours</h2><p>explication du cours</p>`",  
+
 quizz :[  
     {question : "question 1",  
     reponses : [  
@@ -26,5 +27,5 @@ quizz :[
         "1"  
         ]  
     }  
-    ] 
+    ]}
 ```
