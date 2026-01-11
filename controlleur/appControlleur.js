@@ -1,6 +1,6 @@
 import ProgressBar from "../components/ProgressBar/ProgressBar.js";
 import Sommaire from "../components/Sommaire/Sommaire.js";
-import { Card } from "../components/Card/card_1.js";
+import Cards from "../components/Card/Cards.js";
 
 const progress_bar = new ProgressBar("navbar");
 
@@ -187,7 +187,7 @@ const sommaire = new Sommaire(contenue, "main", progress_bar);
 const seuille = 100 / contenue.length;
 
 contenue.forEach((element, i) => {
-    Card("main", "Titre de l'étape", element, progress_bar, seuille, i);
+    const card = new Cards("main", "Titre de l'étape", element, progress_bar, seuille, i);
 });
 
 // progress_bar.UpdateProgressBar(10);
