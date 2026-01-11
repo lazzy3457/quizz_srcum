@@ -20,7 +20,7 @@ export function Card(conteneur, titre, contenue, progressBar, progret, id) {
     // div de la partie coursA
     let section_cours = document.createElement("div");
     section_cours.className = "section_cours";
-    card.appendChild(section_cours);
+    card.appendChild(section_cours);4
 
     // la div titre de la partie cours
     let conteneur_titre_cours = document.createElement("div");
@@ -35,7 +35,10 @@ export function Card(conteneur, titre, contenue, progressBar, progret, id) {
 
     // button ouverture et fermeture
     let button_action = document.createElement("button");
-    button_action.textContent = "action";
+    button_action.className = "button_action";
+    button_action.textContent = "<";
+    button_action.style.transform = "rotate(-90deg)";
+
     conteneur_titre_cours.appendChild(button_action);
 
     // div qui contient le cours 
@@ -52,16 +55,24 @@ export function Card(conteneur, titre, contenue, progressBar, progret, id) {
 
     let etat = true;
 
+    //&uarr; fleche du haut
+    //&darr; fleche du bas  
+    // action du button d'ouverture et fermeture
+    // a faire avec button_action.innerHTML.
+
     button_action.addEventListener("click", () => {
         if (etat) {
             etat = false;
             conteneur_cours.style.display = "none";
             section_quiz.style.display = "none";
+            button_action.style.transform = "rotate(90deg)";
         }
         else {
             etat = true;
             conteneur_cours.style.display = "flex";
             section_quiz.style.display = "block";
+            button_action.style.transform = "rotate(-90deg)";
+
         }
     })
 

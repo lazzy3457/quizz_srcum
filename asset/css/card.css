@@ -1,4 +1,3 @@
-
 .card {
     display: flex;
     justify-content: center;
@@ -10,14 +9,20 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.section_cours,
+.section_quiz, 
+#sommaire  {
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: var(--grey_card_open);
+}
+
 .section_cours {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: var(--grey_card_open);
     padding: 0;
-    border-radius: 30px;
-    overflow: hidden;
+    
 
 }
 
@@ -29,83 +34,11 @@
     padding: 10px;
     margin: 0;
     position: relative;
-    
+
 
 }
 
-/* 1. Style the button to align text and arrow */
-.conteneur-titre button {
-    display: flex;
-    justify-content: space-between; /* Text left, arrow right */
-    align-items: center;
-    width: 100%;
-    padding: 10px 15px;
-    background-color: #333; /* Dark background for white arrow */
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* 2. Create the White Arrow (Default: Points Down) */
-.conteneur-titre button::after {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
-    
-    /* Initial rotation (Down) */
-    transform: rotate(45deg);
-    transition: transform 0.3s ease; /* Smooth animation */
-    margin-left: 10px;
-}
-
-/* 3. Rotate Arrow Up when Expanded */
-.conteneur-titre button[aria-expanded="true"]::after {
-    transform: rotate(-135deg);
-}
-
-/* Style for the button itself */
-.btn-fleche {
-    display: flex;
-    justify-content: space-between; /* Text on left, arrow on right */
-    align-items: center;
-    width: 100%;
-    padding: 10px 15px;
-    background-color: #333; /* Dark background so white arrow is visible */
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* The Arrow (Pseudo-element) */
-.btn-fleche::after {
-    content: ''; /* Essential for the element to exist */
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    
-    /* The Arrow Shape */
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
-    
-    /* Default Rotation (Down) */
-    transform: rotate(45deg);
-    transition: transform 0.3s ease;
-    margin-left: 10px;
-}
-
-/* The Arrow Rotation (When Expanded) */
-.btn-fleche[aria-expanded="true"]::after {
-    transform: rotate(-135deg); /* Rotates Up */
-}
-
-
-
-.contenue_cours{
+.contenue_cours {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -114,16 +47,11 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.conteneur_cours, .conteneur_quizz {
+.conteneur_cours,
+.conteneur_quizz {
     padding: 20px;
     font-family: 'Poppins', sans-serif;
 
-}
-
-.section_quiz {
-    background-color: var(--grey_card_open);
-    border-radius: 30px;
-    overflow: hidden;
 }
 
 .conteneur_reponses {
@@ -136,4 +64,81 @@
     width: fit-content;
 }
 
+#sommaire {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+    
+    /* padding: 30px; */
+    max-width: 1140px;
+    min-width: 570px;
+    width: 100%;
+    
 
+}
+
+.conteneur_card {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.sommaire_card {
+    display: flex;
+    /* width: 700px; */
+    /* height: 30px; */
+    margin: 10px 0;
+    padding: 20px 43px;
+    flex-direction: row;
+    align-items: flex-start;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.28);
+
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.sommaire_card h2 {
+    color: #EDEDED;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: "poppins", sans-serif;
+}
+
+.sommaire_card a {
+    display: flex;
+    width: 170px;
+    
+    height: 40px;
+    padding: 19px 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 100px;
+    background: linear-gradient(90deg, #0082A9 0%, #50BEDF 100%);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    font-family: "poppins", sans-serif;
+}
+
+.button_action {
+    display: flex;
+    color: white;
+    margin-left: 50px;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+    width: auto;
+    
+}
