@@ -160,7 +160,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
         question.textContent = questionnaire.question;
         conteneur_question.appendChild(question);
 
-        let conteneur_reponses = document.createElement("div");
+        let conteneur_reponses = document.createElement("p");
         conteneur_reponses.className = "conteneur_reponses";
         conteneur_question.appendChild(conteneur_reponses);
 
@@ -169,7 +169,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
 
         questionnaire.reponses.forEach((reponse, i) => {
-            let div_reponse = document.createElement("div")
+            let div_reponse = document.createElement("p")
             div_reponse.className = "conteneur_reponse";
             let input_reponse = document.createElement("input");
             let label_reponse = document.createElement("label");
