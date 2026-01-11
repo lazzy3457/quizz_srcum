@@ -90,6 +90,12 @@
     padding: 30px;
 }
 
+.conteneur_button {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}
+
 .sommaire_card {
     display: flex;
     /* width: 700px; */

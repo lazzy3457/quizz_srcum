@@ -18,7 +18,10 @@ export default class Cards {
 
         this.contenue = data;
 
+        this.nb_bonne_reponse = [];
+
         this.progress = progret / this.quizz.length;
+        this.progret = progret;
 
         
         this.reponse_utilisateur = [] // [{liste_reponse : [4], element_html : null }] id de la reponse idex du tableau
@@ -127,16 +130,21 @@ export default class Cards {
             this.SectionQuestion(questionnaire, y);
         })
 
+        this.conteneur_button = document.createElement("div")
+        this.conteneur_button.className = "conteneur_button";
+        this.conteneur_quiz.appendChild(this.conteneur_button);
+
+
         this.button_validate = document.createElement("button");
         this.button_validate.textContent = "Validé";
-        this.conteneur_quiz.appendChild(this.button_validate);
+        this.conteneur_button.appendChild(this.button_validate);
         this.button_validate.addEventListener("click", () => {
             this.TraitementReponse();
         })
 
         this.button_suivant = document.createElement("button");
         this.button_suivant.textContent = "Suivant";
-        this.conteneur_quiz.appendChild(this.button_suivant);
+        this.conteneur_button.appendChild(this.button_suivant);
         this.button_suivant.addEventListener("click", () => {
             window.scrollTo({
             top: document.body.scrollHeight,
@@ -225,22 +233,31 @@ export default class Cards {
             this.sommaire.deverrou(this.id + 1); // deverrouille la prochaine partie
         }
 
+        // this.progressBar.UpdateProgressBar(-this.progress * this.nb_bonne_reponse.length);
+
         this.termimer = true;
+
         console.log(this.reponse_utilisateur)
         this.reponse_utilisateur.forEach((reponse, i) => {
             reponse.liste_reponse.forEach((valeur, y) => {
 
-                console.log(this.quizz[i].valide, i, valeur)
+                // console.log(this.quizz[i].valide, i, valeur)
 
                 valeur = +valeur + 1;
 
-                console.log(this.quizz[i].valide, i, valeur)
+                // console.log(this.quizz[i].valide, i, valeur)
 
 
                 if (this.quizz[i].valide.includes(valeur.toString())) {
                     reponse.element_html[y].style.backgroundColor = "var(--vert)";
-                    this.progressBar.UpdateProgressBar(this.progress);
                     this.liste_conteneur_correction[i].innerHTML = ``;
+
+                    if (!this.nb_bonne_reponse.includes(i)) {
+                        this.nb_bonne_reponse.push(i);
+                        this.progressBar.UpdateProgressBar(this.progress);
+
+                    }
+                    console.log(this.nb_bonne_reponse);
 
                 }
                 else {
@@ -251,11 +268,22 @@ export default class Cards {
                     correction.textContent = "Correction : " +  this.quizz[i].reponses[indice];
                     this.liste_conteneur_correction[i].innerHTML = ``;
                     this.liste_conteneur_correction[i].appendChild(correction);
+
+                    if (this.nb_bonne_reponse.includes(i)) {
+                        this.nb_bonne_reponse = this.nb_bonne_reponse.filter(item => item !== i);
+                        this.progressBar.UpdateProgressBar(-this.progress);
+
+
+                    }
                 }
             })
         })
 
-        this.AfficherSuivant();
+        // this.progressBar.UpdateProgressBar(this.progress * this.nb_bonne_reponse.length);
+        // console.log(this.nb_bonne_reponse);
+        if (this.termimer == false) {
+            this.AfficherSuivant();
+        }
         this.button_suivant.style.display = "block";
         // this.button_validate.style.display = "none";
     }
