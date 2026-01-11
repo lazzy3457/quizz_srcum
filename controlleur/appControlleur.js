@@ -188,9 +188,12 @@ const sommaire = new Sommaire(contenue, "main", progress_bar);
 
 const seuille = 100 / contenue.length;
 
-contenue.forEach((element, i) => {
-    const card = new Cards("main", "Titre de l'étape", element, progress_bar, seuille, i, sommaire);
-});
+// contenue.forEach((element, i) => {
+//     const card = new Cards("main", "Titre de l'étape", element, progress_bar, seuille, i, sommaire);
+// });
+
+const card = new Cards("main", "Titre de l'étape", contenue, progress_bar, seuille, 0, sommaire);
+
 
 // progress_bar.UpdateProgressBar(10);
 

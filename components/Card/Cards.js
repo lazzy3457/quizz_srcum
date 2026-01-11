@@ -11,10 +11,12 @@ export default class Cards {
         this.id = id;
         this.sommaire = sommaire;
 
-        this.data = data;
-        this.cours = data.cours;
-        this.quizz = data.quizz
+        this.data = data[id];
+        this.cours = data[id].cours;
+        this.quizz = data[id].quizz
         this.titre = this.data.titre;
+
+        this.contenue = data;
 
         this.progress = progret / this.quizz.length;
 
@@ -131,6 +133,17 @@ export default class Cards {
         this.button_validate.addEventListener("click", () => {
             this.TraitementReponse();
         })
+
+        this.button_suivant = document.createElement("button");
+        this.button_suivant.textContent = "Suivant";
+        this.conteneur_quiz.appendChild(this.button_suivant);
+        this.button_suivant.addEventListener("click", () => {
+            window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+            });
+        })
+        this.button_suivant.style.display = "none";
     }
 
     SectionQuestion (questionnaire, y) {
@@ -187,13 +200,17 @@ export default class Cards {
     GestionEnregistrementReponse (input, div_reponse, id_question, id_reponse) {
         let info = this.reponse_utilisateur[id_question];
         if (input.type == "radio") {
+            if (this.reponse_utilisateur[id_question].element_html[0]) {
+                this.reponse_utilisateur[id_question].element_html[0].style.backgroundColor = "transparent";
+            }               
+
             this.reponse_utilisateur[id_question].liste_reponse = [];
             this.reponse_utilisateur[id_question].element_html = [];
 
             this.reponse_utilisateur[id_question].liste_reponse.push((id_reponse).toString());
             this.reponse_utilisateur[id_question].element_html.push(div_reponse);
         }
-        else if (info.liste_reponse.include(id_reponse)) {
+        else if (info.liste_reponse.includes(id_reponse)) {
             this.reponse_utilisateur[id_question].liste_reponse = this.reponse_utilisateur[id_question].liste_reponse.filter(item => item !== id_reponse);
             this.reponse_utilisateur[id_question].element_html = this.reponse_utilisateur[id_question].element_html.filter(item => item !== div_reponse);
         }
@@ -204,7 +221,9 @@ export default class Cards {
     }
 
     TraitementReponse () {
-        this.sommaire.deverrou(this.id + 1); // deverrouille la prochaine partie
+        if (this.id + 1 < this.contenue.length) {
+            this.sommaire.deverrou(this.id + 1); // deverrouille la prochaine partie
+        }
 
         this.termimer = true;
         console.log(this.reponse_utilisateur)
@@ -221,6 +240,8 @@ export default class Cards {
                 if (this.quizz[i].valide.includes(valeur.toString())) {
                     reponse.element_html[y].style.backgroundColor = "var(--vert)";
                     this.progressBar.UpdateProgressBar(this.progress);
+                    this.liste_conteneur_correction[i].innerHTML = ``;
+
                 }
                 else {
                     reponse.element_html[y].style.backgroundColor = "var(--rouge)";
@@ -228,11 +249,44 @@ export default class Cards {
                     correction.className = "correction";
                     let indice = parseInt(this.quizz[i].valide[0])-1;
                     correction.textContent = "Correction : " +  this.quizz[i].reponses[indice];
+                    this.liste_conteneur_correction[i].innerHTML = ``;
                     this.liste_conteneur_correction[i].appendChild(correction);
                 }
             })
         })
+
+        this.AfficherSuivant();
+        this.button_suivant.style.display = "block";
+        // this.button_validate.style.display = "none";
     }
+    
+    AfficherSuivant() {
+    // 1. Calculer l'index suivant
+    const suivantIndex = this.id + 1;
+
+    // 2. Vérifier s'il reste des données dans ton tableau global 'contenue'
+    if (this.contenue[suivantIndex]) {
+        // 3. Créer la nouvelle instance de carte
+        // On utilise les mêmes paramètres que le constructeur original
+        new Cards(
+            this.conteneur, 
+            "pika pika",  // titre tmp
+            this.contenue, 
+            this.progressBar, 
+            this.progret, 
+            suivantIndex, 
+            this.sommaire
+        );
+        
+        
+    } else {
+        alert(
+            "Félicitations, vous avez terminé toutes les sections !" + 
+            "\n" + 
+            "Avec un total de " + this.progressBar.pourcentage + "% de bonne réponses"
+        );
+    }
+}
 
     
 }
