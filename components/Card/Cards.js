@@ -19,7 +19,8 @@ export default class Cards {
         this.reponse_utilisateur = [] // [{liste_reponse : [4], element_html : null }] id de la reponse idex du tableau
         this.quizz.forEach((question, index) => {
             this.reponse_utilisateur.push({liste_reponse : [], element_html : [] });
-        })
+        });
+        this.liste_conteneur_correction = [];
 
         this.visibiliy = true;
 
@@ -145,6 +146,7 @@ export default class Cards {
         let table_verif = [];
         let progress_bar_update = false;
 
+        let conteneur_correction = document.createElement("div");
 
         questionnaire.reponses.forEach((reponse, i) => {
             let div_reponse = document.createElement("div")
@@ -169,6 +171,11 @@ export default class Cards {
                 this.GestionEnregistrementReponse(input_reponse, div_reponse, y, i);
             })
         });
+
+        this.conteneur_question.appendChild(conteneur_correction);
+        this.liste_conteneur_correction.push(conteneur_correction);
+
+        
     }
 
     GestionEnregistrementReponse (input, div_reponse, id_question, id_reponse) {
@@ -204,9 +211,14 @@ export default class Cards {
 
                 if (this.quizz[i].valide.includes(valeur.toString())) {
                     reponse.element_html[y].style.backgroundColor = "var(--vert)";
+                    this.progressBar.UpdateProgressBar(this.progret);
                 }
                 else {
                     reponse.element_html[y].style.backgroundColor = "var(--rouge)";
+                    let correction = document.createElement("p");
+                    correction.className = "correction";
+                    correction.textContent = this.quizz[y].reponse[parseInt(this.quizz[y].valide[0])];
+                    this.liste_conteneur_correction[y].appendChild(correction);
                 }
             })
         })
