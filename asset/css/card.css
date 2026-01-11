@@ -36,7 +36,7 @@
     top: calc(50% - 10px);
 }
 
-.conteneur_cours {
+.conteneur_cours, .conteneur_quizz {
     padding: 20px;
 }
 
@@ -45,5 +45,6 @@
     border-radius: 30px;
     overflow: hidden;
 }
+
 
 

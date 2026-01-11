@@ -9,7 +9,7 @@ export default class ProgressBar {
         this.affiche_pourcentage = document.createElement("p");
         this.conteneur = document.createElement("div");
         this.progress_bar.className = "progress_bar";
-        this.pourcentage = 50;
+        this.pourcentage = 0;
         this.size = 200;
         this.contenu = document.createElement("div");
         
@@ -18,19 +18,17 @@ export default class ProgressBar {
         this.progress_bar.appendChild(this.affiche_pourcentage);
         this.conteneur.appendChild(this.contenu);
 
-        this.affiche_pourcentage.textContent = this.pourcentage + "%";
 
         this.conteneur.style.width = this.size + "px";
         this.conteneur.style.backgroundColor = "var(--grey_card_open)";
         this.conteneur.style.borderRadius = "100px"
         this.conteneur.style.padding = " 5px";
 
-        this.contenu.style.width = (this.size * this.pourcentage / 100) + "px";
         this.contenu.style.backgroundColor = "var(--vert)";
         this.contenu.style.borderRadius = "100px"
         this.contenu.style.padding = " 5px 0";
 
-
+        this.Render();
 
     }   
 
@@ -42,8 +40,14 @@ export default class ProgressBar {
             return ;
         }
 
-        this.contenu.style.width = (this.size * this.pourcentage / 100) + "px";
-        this.affiche_pourcentage.textContent = this.pourcentage + "%";
+        this.Render();
+    }
+
+    Render () {
+
+        const largeurPx = Math.round((this.size * this.pourcentage) / 100);        
+        this.affiche_pourcentage.textContent = Math.round(this.pourcentage) + "%";
+        this.contenu.style.width = largeurPx + "px";
     }
 
 }

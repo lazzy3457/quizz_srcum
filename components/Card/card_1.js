@@ -2,7 +2,7 @@
 
 const liste = {};
 
-export function Card (conteneur, titre, contenue, progressBar) {
+export function Card (conteneur, titre, contenue, progressBar, progret) {
     // le conteneur : est l'element html qui va receuillir la card
     // le titre : est le titre de la card
     // le contenue : est le cours et les question au format JSON
@@ -16,7 +16,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
     card.className = "card";
     div.appendChild(card)
 
-    // div de la partie cours
+    // div de la partie coursA
     let section_cours = document.createElement("div");
     section_cours.className = "section_cours";
     card.appendChild(section_cours);
@@ -44,7 +44,7 @@ export function Card (conteneur, titre, contenue, progressBar) {
 
     // div qui contiens le cours sous forme de paragraphe
     let contenu_cours = document.createElement("div");
-    contenu_cours.innerHTML = contenue.;
+    contenu_cours.innerHTML = contenue.cours;
     conteneur_cours.appendChild(contenu_cours);
 
     let etat = true;
@@ -79,18 +79,19 @@ export function Card (conteneur, titre, contenue, progressBar) {
     conteneur_titre_quiz.appendChild(titre_quiz);
 
     // conteneur du quiz
-    let conteneur_quiz = document.createElement("div");
-    conteneur_quiz.className = "conteneur_quiz";
-    section_quiz.appendChild(conteneur_quiz);
+    let conteneur_quizz = document.createElement("div");
+    conteneur_quizz.className = "conteneur_quizz";
+    section_quiz.appendChild(conteneur_quizz);
 
     // conteneur d'une question
     let conteneur_question = document.createElement("div");
     conteneur_question.className = "conteneur_question";
-    conteneur_quiz.appendChild(conteneur_question);
+    conteneur_quizz.appendChild(conteneur_question);
 
     
-    const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
-    let add_progeress_bar = 20 / quizz.length;
+    // const quizz = [{question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "radio", valide : ["2"]}, {question : "question 1", reponses : ["reponse 1", "reponse 2", "reponse 3"], type : "checkbox", valide : ["2", "1"]}];
+    const quizz = contenue.quizz;
+    let add_progeress_bar = progret / quizz.length;
 
     quizz.forEach((questionnaire, y) => {
         //
