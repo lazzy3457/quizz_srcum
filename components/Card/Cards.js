@@ -15,6 +15,11 @@ export default class Cards {
         this.cours = data.cours;
         this.quizz = data.quizz
         this.titre = this.data.titre;
+        
+        this.reponse_utilisateur = [] // [{liste_reponse : [4], element_html : null }] id de la reponse idex du tableau
+        this.quizz.forEach((question, index) => {
+            this.reponse_utilisateur.push({liste_reponse : [], element_html : [] });
+        })
 
         this.visibiliy = true;
 
@@ -112,44 +117,84 @@ export default class Cards {
         this.data.quizz.forEach((questionnaire, y) => {
             this.SectionQuestion(questionnaire, y);
         })
+
+        this.button_validate = document.createElement("button");
+        this.button_validate.textContent = "Validé";
+        this.conteneur_quiz.appendChild(this.button_validate);
+        this.button_validate.addEventListener("click", () => {
+            this.TraitementReponse();
+        })
     }
 
     SectionQuestion (questionnaire, y) {
-        //
-        this.question = document.createElement("h4");
-        this.question.className = "question";
-        this.question.textContent = questionnaire.question;
-        this.conteneur_question.appendChild(this.question);
 
-        this.conteneur_reponses = document.createElement("div");
-        this.conteneur_reponses.className = "conteneur_reponses";
-        this.conteneur_question.appendChild(this.conteneur_reponses);
+        // conteneur d'une question
+        let conteneur_question = document.createElement("div");
+        conteneur_question.className = "conteneur_question";
+        this.conteneur_quiz.appendChild(conteneur_question);
+        //
+        let question = document.createElement("h4");
+        question.className = "question";
+        question.textContent = questionnaire.question;
+        this.conteneur_question.appendChild(question);
+
+        let conteneur_reponses = document.createElement("div");
+        conteneur_reponses.className = "conteneur_reponses";
+        this.conteneur_question.appendChild(conteneur_reponses);
 
         let table_verif = [];
         let progress_bar_update = false;
 
 
         questionnaire.reponses.forEach((reponse, i) => {
-            this.div_reponse = document.createElement("p")
-            this.div_reponse.className = "conteneur_reponse";
-            this.input_reponse = document.createElement("input");
-            this.label_reponse = document.createElement("label");
+            let div_reponse = document.createElement("div")
+            div_reponse.className = "conteneur_reponse";
+            let input_reponse = document.createElement("input");
+            let label_reponse = document.createElement("label");
 
-            this.input_reponse.type = questionnaire.type;
-            this.input_reponse.value = i;
-            this.input_reponse.id = y + "_" + i;
-            this.input_reponse.name = y;
-            this.label_reponse.textContent = reponse;
-            this.label_reponse.htmlFor = y + "_" + i;
-            this.etat_question = false;
+            input_reponse.type = questionnaire.type;
+            input_reponse.value = i;
+            input_reponse.id = y + "_" + i + "_" + this.id;
+            input_reponse.name = y;
+            label_reponse.textContent = reponse;
+            label_reponse.htmlFor = y + "_" + i + "_" + this.id;
+            let etat_question = false;
 
+            div_reponse.appendChild(input_reponse);
+            div_reponse.appendChild(label_reponse);
+            conteneur_reponses.appendChild(div_reponse);
 
-
-
-            this.div_reponse.appendChild(this.input_reponse);
-            this.div_reponse.appendChild(this.label_reponse);
-            this.conteneur_reponses.appendChild(this.div_reponse);
+            input_reponse.addEventListener("click", () => {
+                this.GestionEnregistrementReponse(input_reponse, div_reponse, y, i);
+            })
         });
     }
+
+    GestionEnregistrementReponse (input, div_reponse, id_question, id_reponse) {
+        let info = this.reponse_utilisateur[id_question];
+        if (input.type == "radio") {
+            this.reponse_utilisateur[id_question].reponse = [];
+            this.reponse_utilisateur[id_question].element_html = [];
+
+            this.reponse_utilisateur[id_question].reponse.push(id_reponse);
+            this.reponse_utilisateur[id_question].element_html.push(div_reponse);
+        }
+        else if (info.liste_reponse.include(id_reponse)) {
+            this.reponse_utilisateur[id_question].reponse.filter(id_reponse);
+            this.reponse_utilisateur[id_question].element_html.filter(div_reponse);
+        }
+        else {
+            this.reponse_utilisateur[id_question].reponse.push(id_reponse);
+            this.reponse_utilisateur[id_question].element_html.push(div_reponse);
+        }
+    }
+
+    TraitementReponse () {
+        this.reponse_utilisateur.forEach((reponse, i) => {
+            
+        })
+    }
+
+    
 }
 
