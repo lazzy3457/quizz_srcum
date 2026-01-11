@@ -2,7 +2,7 @@
 
 const liste = {};
 
-export function Card (conteneur, titre, contenue, progressBar, progret) {
+export default function Card (conteneur, titre, contenue, progressBar, progret) {
     // le conteneur : est l'element html qui va receuillir la card
     // le titre : est le titre de la card
     // le contenue : est le cours et les question au format JSON

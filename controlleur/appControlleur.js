@@ -1,6 +1,6 @@
 // import ScrollButton from "./function/scroll_button.js";
 import ProgressBar from "../components/ProgressBar/ProgressBar.js";
-import { Card } from "../components/Card/Card_1.js";
+import { Card } from "../components/Card/card_1.js";
 
 const progress_bar = new ProgressBar("navbar");
 
